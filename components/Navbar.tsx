@@ -21,6 +21,8 @@ export default function Navbar() {
     { href: "/dashboard", label: "Tableau de bord" },
     { href: "/profile", label: "Profil" },
     { href: "/projects", label: "Projets" },
+    { href: "/generate", label: "Générer" },
+    { href: "/chat", label: "Chat" },
   ];
 
   const toggleTheme = () => {

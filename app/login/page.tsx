@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -37,6 +38,13 @@ export default function LoginPage() {
         {error && (
           <p className="text-red-500 text-sm text-center mb-4">{error}</p>
         )}
+
+        <p className="text-sm text-gray-600 mb-4">
+          Pas de compte ?{" "}
+          <Link href="/register" className="text-blue-600 font-semibold hover:underline">
+            Inscris-toi
+          </Link>
+        </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
          <input
