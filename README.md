@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Content SaaS
 
-## Getting Started
+Plateforme de génération de contenu assistée par IA, développée dans le cadre d'un Projet de Fin d'Année (PFA) / stage de fin d'études.
 
-First, run the development server:
+🔗 **Démo en ligne :** [https://content-saas-two.vercel.app](https://content-saas-two.vercel.app)
+
+## Sommaire
+
+- [Présentation](#présentation)
+- [Stack technique](#stack-technique)
+- [Fonctionnalités](#fonctionnalités)
+- [Installation locale](#installation-locale)
+- [Variables d'environnement](#variables-denvironnement)
+- [Structure du projet](#structure-du-projet)
+- [Déploiement](#déploiement)
+
+## Présentation
+
+Content SaaS permet à un utilisateur de générer, sauvegarder et exporter du contenu textuel (articles, titres, descriptions, hashtags, résumés, traductions...) à l'aide de l'intelligence artificielle, avec une gestion de projets, un historique complet, un mode chat conversationnel, et l'analyse de documents PDF/DOCX.
+
+## Stack technique
+
+- **Framework** : Next.js (App Router, Turbopack)
+- **Langage** : TypeScript
+- **Style** : Tailwind CSS
+- **Authentification** : NextAuth v4 (Credentials Provider)
+- **Base de données** : PostgreSQL (Neon), via Prisma ORM
+- **IA** : OpenRouter (modèle `openai/gpt-oss-20b:free`)
+- **Extraction de documents** : `pdf-parse` (PDF), `mammoth` (DOCX)
+- **Génération de PDF côté client** : `jsPDF`
+- **Déploiement** : Vercel
+
+## Fonctionnalités
+
+### Authentification & compte
+- Inscription et connexion sécurisées (mots de passe hachés avec `bcryptjs`)
+- Gestion du profil (modification du nom, changement de mot de passe)
+
+### Gestion de projets
+- Création, modification, suppression et recherche de projets
+
+### Génération de contenu IA
+- Types de contenu : texte, titres, description, hashtags, résumé, reformulation, traduction
+- Choix du ton (professionnel, marketing, humoristique, décontracté)
+- Paramètres avancés : longueur, langue, niveau de créativité
+
+### Upload et analyse de documents
+- Upload de fichiers PDF ou DOCX
+- Extraction automatique du texte, réutilisable comme source de génération
+
+### Historique et sauvegarde
+- Chaque génération est automatiquement sauvegardée et liée à l'utilisateur (et optionnellement à un projet)
+- Consultation, copie, export TXT, export PDF et suppression depuis l'historique
+
+### Chat IA
+- Conversations multiples par utilisateur, avec historique persistant
+- Création, sélection et suppression de conversations
+
+### Tableau de bord
+- Statistiques et activité récente de l'utilisateur
+
+## Installation locale
+
+### Prérequis
+- Node.js 18+
+- Un compte [Neon](https://neon.tech) (ou toute base PostgreSQL)
+- Une clé API [OpenRouter](https://openrouter.ai)
+
+### Étapes
+
+```bash
+git clone https://github.com/ayaofd/content-saas.git
+cd content-saas
+npm install
+```
+
+Crée un fichier `.env.local` à la racine (voir la section [Variables d'environnement](#variables-denvironnement)).
+
+Génère le client Prisma et pousse le schéma sur ta base :
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+Lance le serveur de développement :
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application est accessible sur [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | URL de connexion PostgreSQL (pooled, utilisée par l'application) |
+| `DIRECT_URL` | URL de connexion directe PostgreSQL (utilisée par Prisma Migrate) |
+| `NEXTAUTH_SECRET` | Clé secrète pour signer les sessions NextAuth |
+| `NEXTAUTH_URL` | URL de base de l'application (`http://localhost:3000` en local, l'URL Vercel en production) |
+| `OPENROUTER_API_KEY` | Clé API OpenRouter pour les appels IA |
 
-## Learn More
+## Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+content-saas/
+├── app/
+│   ├── api/              # Routes API (auth, user, projects, generate, history, chat, conversations, documents)
+│   ├── chat/             # Interface de chat IA
+│   ├── dashboard/        # Tableau de bord
+│   ├── generate/         # Génération de contenu IA
+│   ├── login/ register/  # Authentification
+│   ├── profile/          # Profil utilisateur
+│   └── projects/         # Gestion des projets
+├── components/           # Composants réutilisables (Navbar, HistoryList...)
+├── lib/                  # Utilitaires (auth, prisma, openrouter)
+├── prisma/
+│   └── schema.prisma     # Schéma de base de données
+└── .env.local            # Variables d'environnement (non versionné)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Déploiement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Le projet est déployé sur **Vercel**, connecté au dépôt GitHub. Chaque push sur la branche `main` déclenche un redéploiement automatique.
 
-## Deploy on Vercel
+Les variables d'environnement doivent être configurées dans **Project Settings → Environments** sur Vercel, avec `NEXTAUTH_URL` pointant vers le domaine de production.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projet réalisé dans le cadre d'un PFA / stage de fin d'études.
