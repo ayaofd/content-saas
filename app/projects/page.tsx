@@ -25,10 +25,24 @@ export default function ProjectsPage() {
   const [savingEdit, setSavingEdit] = useState(false);
 
   const loadProjects = async () => {
-    const res = await fetch("/api/projects");
-    const data = await res.json();
-    setProjects(data);
-    setLoading(false);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+
+      if (!res.ok || !Array.isArray(data)) {
+        console.error("Réponse inattendue de /api/projects:", data);
+        setProjects([]);
+        return;
+      }
+
+      setProjects(data);
+    } catch (err) {
+      console.error("Erreur de chargement des projets:", err);
+      setProjects([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -40,27 +54,40 @@ export default function ProjectsPage() {
     setCreating(true);
     setError("");
 
-    const res = await fetch("/api/projects", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, description }),
-    });
+    try {
+      const res = await fetch("/api/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, description }),
+      });
 
-    if (res.ok) {
-      setName("");
-      setDescription("");
-      await loadProjects();
-    } else {
-      const data = await res.json();
-      setError(data.error || "Erreur lors de la création");
+      if (res.ok) {
+        setName("");
+        setDescription("");
+        await loadProjects();
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Erreur lors de la création");
+      }
+    } catch (err) {
+      console.error("Erreur lors de la création du projet:", err);
+      setError("Erreur réseau, réessaie plus tard");
+    } finally {
+      setCreating(false);
     }
-
-    setCreating(false);
   };
 
   const handleDelete = async (id: string) => {
-    await fetch(`/api/projects/${id}`, { method: "DELETE" });
-    setProjects((prev) => prev.filter((p) => p.id !== id));
+    try {
+      const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        setProjects((prev) => prev.filter((p) => p.id !== id));
+      } else {
+        console.error("Échec de la suppression du projet:", id);
+      }
+    } catch (err) {
+      console.error("Erreur lors de la suppression du projet:", err);
+    }
   };
 
   const startEdit = (project: Project) => {
@@ -78,24 +105,30 @@ export default function ProjectsPage() {
   const handleEditSubmit = async (id: string) => {
     setSavingEdit(true);
 
-    const res = await fetch(`/api/projects/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: editName, description: editDescription }),
-    });
+    try {
+      const res = await fetch(`/api/projects/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: editName, description: editDescription }),
+      });
 
-    if (res.ok) {
-      const updated = await res.json();
-      setProjects((prev) =>
-        prev.map((p) => (p.id === id ? updated : p))
-      );
-      cancelEdit();
+      if (res.ok) {
+        const updated = await res.json();
+        setProjects((prev) =>
+          prev.map((p) => (p.id === id ? updated : p))
+        );
+        cancelEdit();
+      } else {
+        console.error("Échec de la mise à jour du projet:", id);
+      }
+    } catch (err) {
+      console.error("Erreur lors de la mise à jour du projet:", err);
+    } finally {
+      setSavingEdit(false);
     }
-
-    setSavingEdit(false);
   };
 
-  const filteredProjects = projects.filter(
+  const filteredProjects = (Array.isArray(projects) ? projects : []).filter(
     (p) =>
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (p.description ?? "").toLowerCase().includes(searchQuery.toLowerCase())
