@@ -68,6 +68,12 @@ className="border-2 border-blue-500 bg-gray-300 p-3 rounded-lg focus:outline-non
           >
             {loading ? "Connexion..." : "Se connecter"}
           </button>
+          <Link
+            href="/forgot-password"
+            className="text-sm text-blue-600 hover:underline text-center"
+          >
+            Mot de passe oublié ?
+          </Link>
         </form>
       </div>
     </main>
