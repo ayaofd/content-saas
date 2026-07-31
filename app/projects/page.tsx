@@ -155,7 +155,7 @@ export default function ProjectsPage() {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
             />
           </div>
 
@@ -166,7 +166,7 @@ export default function ProjectsPage() {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
               rows={2}
             />
           </div>
@@ -176,7 +176,7 @@ export default function ProjectsPage() {
           <button
             type="submit"
             disabled={creating}
-            className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm font-medium w-fit px-4"
+            className="bg-[#C9A227] text-[#3D0714] py-2 rounded-lg hover:bg-[#E4C578] disabled:opacity-50 text-sm font-medium w-fit px-4"
           >
             {creating ? "Création..." : "Créer le projet"}
           </button>
@@ -190,7 +190,7 @@ export default function ProjectsPage() {
           placeholder="Rechercher un projet par nom ou description..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
         />
       </div>
 
@@ -221,19 +221,19 @@ export default function ProjectsPage() {
                       type="text"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
                     />
                     <textarea
                       value={editDescription}
                       onChange={(e) => setEditDescription(e.target.value)}
                       rows={2}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
                     />
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleEditSubmit(project.id)}
                         disabled={savingEdit}
-                        className="bg-blue-600 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                        className="bg-[#C9A227] text-[#3D0714] text-sm px-3 py-1.5 rounded-lg hover:bg-[#E4C578] disabled:opacity-50"
                       >
                         {savingEdit ? "Enregistrement..." : "Enregistrer"}
                       </button>
@@ -260,7 +260,7 @@ export default function ProjectsPage() {
                     <div className="flex gap-3 shrink-0 ml-4">
                       <button
                         onClick={() => startEdit(project)}
-                        className="text-sm text-blue-600 hover:text-blue-700"
+                        className="text-sm text-[#5C0A1E] dark:text-[#E4C578] hover:text-[#7A0F28] dark:hover:text-[#F0DBA0]"
                       >
                         Modifier
                       </button>

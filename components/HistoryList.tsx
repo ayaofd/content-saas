@@ -71,7 +71,7 @@ export default function HistoryList({ projectId }: { projectId?: string }) {
   return (
     <div className="flex flex-col gap-3">
       {items.map((item) => (
-        <div key={item.id} className="rounded-lg border border-gray-200 p-3 bg-white">
+        <div key={item.id} className="rounded-lg border border-[#C9A227]/30 p-3 bg-white">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-medium text-gray-500 uppercase">
               {item.type} {item.tone ? `· ${item.tone}` : ""}
@@ -84,19 +84,19 @@ export default function HistoryList({ projectId }: { projectId?: string }) {
           <div className="flex flex-wrap gap-3 mt-2">
             <button
               onClick={() => handleCopy(item.result)}
-              className="text-xs text-blue-600 hover:underline"
+              className="text-xs text-[#5C0A1E] hover:underline"
             >
               Copier
             </button>
             <button
               onClick={() => handleDownloadTxt(item)}
-              className="text-xs text-blue-600 hover:underline"
+              className="text-xs text-[#5C0A1E] hover:underline"
             >
               Exporter TXT
             </button>
             <button
               onClick={() => handleDownloadPdf(item)}
-              className="text-xs text-blue-600 hover:underline"
+              className="text-xs text-[#5C0A1E] hover:underline"
             >
               Télécharger PDF
             </button>

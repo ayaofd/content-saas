@@ -110,7 +110,7 @@ export default function ChatPage() {
       <div className="w-64 flex flex-col gap-2 border-r border-gray-200 dark:border-gray-700 pr-4">
         <button
           onClick={handleNewConversation}
-          className="bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700"
+          className="bg-[#C9A227] text-[#3D0714] py-2 rounded-lg text-sm font-medium hover:bg-[#E4C578]"
         >
           + Nouvelle conversation
         </button>
@@ -121,7 +121,7 @@ export default function ChatPage() {
               key={c.id}
               className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer text-sm ${
                 activeId === c.id
-                  ? "bg-blue-50 dark:bg-gray-700 text-blue-700 dark:text-white"
+                  ? "bg-[#C9A227]/10 dark:bg-gray-700 text-[#5C0A1E] dark:text-[#E4C578]"
                   : "hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
               }`}
               onClick={() => handleSelectConversation(c.id)}
@@ -159,7 +159,7 @@ export default function ChatPage() {
                   key={m.id}
                   className={`max-w-[80%] px-4 py-2 rounded-lg text-sm whitespace-pre-wrap ${
                     m.role === "user"
-                      ? "self-end bg-blue-600 text-white"
+                      ? "self-end bg-[#5C0A1E] text-white"
                       : "self-start bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
                   }`}
                 >
@@ -183,12 +183,12 @@ export default function ChatPage() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Écris ton message..."
                 disabled={loading}
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm font-medium"
+                className="bg-[#C9A227] text-[#3D0714] px-4 py-2 rounded-lg hover:bg-[#E4C578] disabled:opacity-50 text-sm font-medium"
               >
                 Envoyer
               </button>

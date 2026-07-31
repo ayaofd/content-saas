@@ -33,15 +33,15 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96 border-2 border-blue-500">
-        <h1 className="text-2xl font-bold text-blue-600">Connexion</h1>
+      <div className="bg-white p-8 rounded-lg shadow-md w-96 border-2 border-[#C9A227]">
+        <h1 className="text-2xl font-bold text-[#5C0A1E]">Connexion</h1>
         {error && (
           <p className="text-red-500 text-sm text-center mb-4">{error}</p>
         )}
 
         <p className="text-sm text-gray-600 mb-4">
           Pas de compte ?{" "}
-          <Link href="/register" className="text-blue-600 font-semibold hover:underline">
+          <Link href="/register" className="text-[#5C0A1E] font-semibold hover:underline">
             Inscris-toi
           </Link>
         </p>
@@ -52,25 +52,25 @@ export default function LoginPage() {
   placeholder="Email"
   value={email}
   onChange={(e) => setEmail(e.target.value)}
-className="border-2 border-blue-500 bg-gray-300 p-3 rounded-lg focus:outline-none focus:border-blue-700"  required
+className="border-2 border-[#C9A227] bg-gray-300 p-3 rounded-lg focus:outline-none focus:border-[#5C0A1E]"  required
 />
 <input
   type="password"
   placeholder="Mot de passe"
   value={password}
   onChange={(e) => setPassword(e.target.value)}
-className="border-2 border-blue-500 bg-gray-300 p-3 rounded-lg focus:outline-none focus:border-blue-700"  required
+className="border-2 border-[#C9A227] bg-gray-300 p-3 rounded-lg focus:outline-none focus:border-[#5C0A1E]"  required
 />
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50"
+            className="bg-[#C9A227] text-[#3D0714] py-3 rounded-lg font-semibold hover:bg-[#E4C578] disabled:opacity-50"
           >
             {loading ? "Connexion..." : "Se connecter"}
           </button>
           <Link
             href="/forgot-password"
-            className="text-sm text-blue-600 hover:underline text-center"
+            className="text-sm text-[#5C0A1E] hover:underline text-center"
           >
             Mot de passe oublié ?
           </Link>

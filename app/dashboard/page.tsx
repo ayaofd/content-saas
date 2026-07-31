@@ -57,7 +57,7 @@ export default function DashboardPage() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 border border-gray-100 dark:border-gray-700"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 border border-gray-100 dark:border-gray-700 border-l-4 border-l-[#C9A227]"
           >
             <p className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</p>
             <p className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">
@@ -85,7 +85,7 @@ export default function DashboardPage() {
                   borderRadius: "8px",
                 }}
               />
-              <Bar dataKey="contenus" fill="#2563eb" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="contenus" fill="#C9A227" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

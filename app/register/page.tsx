@@ -55,7 +55,7 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
             />
           </div>
 
@@ -69,7 +69,7 @@ export default function RegisterPage() {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-[#5C0A1E]"
             />
           </div>
 
@@ -80,7 +80,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm font-medium"
+            className="bg-[#C9A227] text-[#3D0714] py-2 rounded-lg hover:bg-[#E4C578] disabled:opacity-50 text-sm font-medium"
           >
             {loading ? "Création..." : "Créer mon compte"}
           </button>
@@ -88,7 +88,7 @@ export default function RegisterPage() {
 
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
           Déjà un compte ?{" "}
-          <Link href="/login" className="text-blue-600 hover:underline">
+          <Link href="/login" className="text-[#5C0A1E] hover:underline">
             Se connecter
           </Link>
         </p>

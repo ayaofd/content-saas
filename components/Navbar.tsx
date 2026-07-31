@@ -40,8 +40,8 @@ export default function Navbar() {
               href={link.href}
               className={`font-medium ${
                 pathname === link.href
-                  ? "text-blue-600 border-b-2 border-blue-600"
-                  : "text-gray-600 dark:text-gray-300 hover:text-blue-600"
+                  ? "text-[#5C0A1E] dark:text-[#E4C578] border-b-2 border-[#5C0A1E] dark:border-[#E4C578]"
+                  : "text-gray-600 dark:text-gray-300 hover:text-[#5C0A1E] dark:hover:text-[#E4C578]"
               }`}
             >
               {link.label}
@@ -93,7 +93,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               className={`font-medium ${
                 pathname === link.href
-                  ? "text-blue-600"
+                  ? "text-[#5C0A1E] dark:text-[#E4C578]"
                   : "text-gray-600 dark:text-gray-300"
               }`}
             >

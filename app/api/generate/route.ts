@@ -40,6 +40,14 @@ const LANGUAGE_LABELS: Record<string, string> = {
   ar: "arabe",
 };
 
+const PLATFORM_LABELS: Record<string, string> = {
+  linkedin: "LinkedIn (ton professionnel, format B2B)",
+  instagram: "Instagram (ton visuel, accrocheur, avec émojis pertinents)",
+  tiktok: "TikTok (ton dynamique, jeune, direct)",
+  facebook: "Facebook (ton convivial, accessible)",
+  x: "X/Twitter (concis, percutant, sous 280 caractères)",
+};
+
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
 
@@ -47,7 +55,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
   }
 
-  const { topic, tone, type, projectId, length, language, creativity } = await req.json();
+  const { topic, tone, type, projectId, length, language, creativity, platform, audience } =
+    await req.json();
 
   if (!topic || typeof topic !== "string") {
     return NextResponse.json({ error: "Texte requis" }, { status: 400 });
@@ -55,6 +64,14 @@ export async function POST(req: Request) {
 
   const promptBuilder = PROMPTS[type] || PROMPTS.texte;
   let prompt = promptBuilder(topic, tone || "professionnel");
+
+  if (platform && PLATFORM_LABELS[platform]) {
+    prompt += ` Ce post est destiné à ${PLATFORM_LABELS[platform]}.`;
+  }
+
+  if (audience && typeof audience === "string" && audience.trim()) {
+    prompt += ` Le public cible est : ${audience.trim()}.`;
+  }
 
   if (length && LENGTH_LABELS[length]) {
     prompt += ` Le résultat doit être ${LENGTH_LABELS[length]}.`;
