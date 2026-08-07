@@ -6,6 +6,8 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
+const HIDDEN_ON = ["/login", "/register", "/forgot-password"];
+
 export default function Navbar() {
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -16,6 +18,10 @@ export default function Navbar() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  if (HIDDEN_ON.includes(pathname)) {
+    return null;
+  }
 
   const links = [
     { href: "/dashboard", label: "Tableau de bord" },
